@@ -1,0 +1,67 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 53742471ece1b85e77fb113429e061ecc366b1c9182a9a06949255ee5f684f28
+
+name:           haskell-fft
+version:        0.1.0.0
+description:    Please see the README on GitHub at https://github.com/viswanathgs/haskell-fft#readme
+homepage:       https://github.com/viswanathgs/haskell-fft#readme
+bug-reports:    https://github.com/viswanathgs/haskell-fft/issues
+author:         Viswanath Sivakumar
+maintainer:     vish@vish.sh
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+
+source-repository head
+  type: git
+  location: https://github.com/viswanathgs/haskell-fft
+
+library
+  exposed-modules:
+      FFT
+      Utils
+  other-modules:
+      Paths_haskell_fft
+  hs-source-dirs:
+      src
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+    , matrix
+  default-language: Haskell2010
+
+executable haskell-fft-exe
+  main-is: Main.hs
+  other-modules:
+      Paths_haskell_fft
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+    , haskell-fft
+    , matrix
+  default-language: Haskell2010
+
+test-suite haskell-fft-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_haskell_fft
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+    , haskell-fft
+    , matrix
+  default-language: Haskell2010

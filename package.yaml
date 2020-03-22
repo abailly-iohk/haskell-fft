@@ -1,0 +1,48 @@
+name:                haskell-fft
+version:             0.1.0.0
+github:              "viswanathgs/haskell-fft"
+license:             BSD3
+author:              "Viswanath Sivakumar"
+maintainer:          "vish@vish.sh"
+
+extra-source-files:
+- README.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at https://github.com/viswanathgs/haskell-fft#readme
+
+dependencies:
+- base >= 4.7 && < 5
+- matrix
+- QuickCheck
+
+library:
+  source-dirs: src
+
+executables:
+  haskell-fft-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - haskell-fft
+
+tests:
+  haskell-fft-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - haskell-fft
