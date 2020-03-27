@@ -1,11 +1,13 @@
 # haskell-fft
 
-Straight-forward implementation of 1-D Fast Fourier Transform (FFT) and its inverse in Haskell. Implements the Cooley-Tukey FFT algorithm for real and complex timeseries data. Variants of the following numpy functions are implemented:
+Straight-forward implementation of 1-D Fast Fourier Transform (FFT), its inverse, and Welch Power Spectral Density (PSD) estimation in Haskell. Implements the Cooley-Tukey FFT algorithm for real and complex timeseries data. Variants of the following numpy functions are implemented:
 - numpy.fft.fft
 - numpy.fft.ifft
 - numpy.fft.rfft
 - numpy.fft.irfft
 - numpy.fft.fftfreq
+- scipy.signal.hann
+- scipy.signal.welch
 
 # Requirements
 
@@ -37,4 +39,10 @@ import Data.Complex
 fourier_components = fft [mkPolar i (pi/i) | i <- [1..10]]
 frequencies = fftfreq 10 1
 timeseries = ifft fourier_components
+```
+
+Welch Power Spectral Density (PSD) estimation:
+```
+import Signal
+(frequencies, psd) = welch [1..100] 10 2
 ```

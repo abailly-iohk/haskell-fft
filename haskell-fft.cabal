@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 53742471ece1b85e77fb113429e061ecc366b1c9182a9a06949255ee5f684f28
+-- hash: c7bfb4bffc19599116838fadc3274e45f938d5e584973f9fca2319e6475ef475
 
 name:           haskell-fft
 version:        0.1.0.0
@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       FFT
+      Signal
       Utils
   other-modules:
       Paths_haskell_fft
