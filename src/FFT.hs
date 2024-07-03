@@ -56,7 +56,7 @@ fft xs
   negativeFreqs = Vector.zipWith3 (\evenX oddX w -> evenX - w * oddX) evenFreqs oddFreqs weights
   evenFreqs = fft $ ifilter (\i _ -> even i) xs
   oddFreqs = fft $ ifilter (\i _ -> odd i) xs
-  weights = Vector.fromList [C.conjugate . C.mkPolar 1 $ theta k | k <- [0 .. n `div` 2 - 1]]
+  weights = Vector.generate (n `div` 2) $ \k -> C.conjugate . C.mkPolar 1 $ theta k
   theta k = 2 * pi * fromIntegral k / fromIntegral n
 
 -- numpy.fft.ifft
@@ -76,7 +76,7 @@ ifft fs = normalize . ifft' $ fs
     negativeFreqs = Vector.zipWith3 (\evenX oddX w -> evenX - w * oddX) evenFreqs oddFreqs weights
     evenFreqs = ifft' $ ifilter (\i _ -> even i) fs
     oddFreqs = ifft' $ ifilter (\i _ -> odd i) fs
-    weights = Vector.fromList [C.mkPolar 1 $ theta k | k <- [0 .. n `div` 2 - 1]]
+    weights = Vector.generate (n `div` 2) $ \k -> C.mkPolar 1 $ theta k
     theta k = 2 * pi * fromIntegral k / fromIntegral n
     unnormalize = fmap (* fromIntegral n)
 
@@ -103,6 +103,6 @@ fftfreq n d = fmap ((/ norm) . fromIntegral) $ freqs n
  where
   freqs n
     | n == 0 = mempty
-    | otherwise = Vector.fromList $ [0 .. n_2 - 1] <> [i - n | i <- [n_2 .. n - 1]]
+    | otherwise = Vector.generate n_2 fromIntegral <> Vector.generate (n - n_2) (\i -> fromIntegral (i + n_2 - n))
   n_2 = if even n then n `div` 2 else (n + 1) `div` 2
   norm = fromIntegral n * d
